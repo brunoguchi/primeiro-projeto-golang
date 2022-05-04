@@ -7,6 +7,8 @@ import (
 	"runtime"
 	"sort"
 	"strings"
+	"teste-golang/pacotes"
+	"teste-golang/utils"
 )
 
 var meuArray [5]int = [5]int{1, 2, 3, 4, 5}
@@ -83,6 +85,9 @@ func main() {
 	serializarParaJsonComEncoder(pessoa1)
 	deserializarJsonComUnmarshal()
 	deserializarJsonComDecoder()
+
+	pacotes.PrintHello()
+	utils.PrintBye()
 }
 
 func somador(valor1, valor2 int) int {
@@ -125,5 +130,5 @@ func deserializarJsonComDecoder() {
 	var pessoa Pessoa
 	json.NewDecoder(strings.NewReader(dadosJson)).Decode(&pessoa)
 
-	fmt.Printf("%+v", pessoa)
+	fmt.Printf("%+v\n", pessoa)
 }
