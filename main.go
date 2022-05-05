@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"runtime"
 	"sort"
@@ -88,10 +89,23 @@ func main() {
 
 	pacotes.PrintHello()
 	utils.PrintBye()
+
+	totalSomador := somatorio(1, 2, 3)
+	log.Println(totalSomador)
 }
 
 func somador(valor1, valor2 int) int {
 	return valor1 + valor2
+}
+
+func somatorio(valores ...int) int {
+	total := 0
+
+	for _, v := range valores {
+		total += v
+	}
+
+	return total
 }
 
 func infoMeuPc() {
@@ -103,12 +117,18 @@ func exemploSlices() {
 	corte := valores[0:] //se não delimitar um index final, o corte pega o array todo
 	fmt.Println(corte)
 
-	sort.Ints(valores)
+	sort.Ints(valores) //ordenação de valores (baseado no tipo do valor)
 	fmt.Println(valores)
 }
 
 func serializarParaJsonComMarshal(pessoa Pessoa) {
-	objJson, _ := json.Marshal(pessoa)
+	objJson, erro := json.Marshal(pessoa)
+
+	if erro != nil {
+		fmt.Println(erro)
+		return
+	}
+
 	fmt.Println(string(objJson))
 }
 
@@ -131,4 +151,10 @@ func deserializarJsonComDecoder() {
 	json.NewDecoder(strings.NewReader(dadosJson)).Decode(&pessoa)
 
 	fmt.Printf("%+v\n", pessoa)
+}
+
+func envia(p, i chan int) {
+	for n := 0; n < 0; n++ {
+		p <- n
+	}
 }
